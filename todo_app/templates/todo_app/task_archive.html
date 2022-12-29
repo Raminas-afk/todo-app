@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Completed Tasks {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col"></div>
+        <div class="col-10">
+            <h2>Completed Tasks</h2><br>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Importance</th>
+                    <th scope="col">Created Date</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            {% for task in tasks %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{task.id}}</th>
+                    <td><a href="{% url 'task-detail' task.id %}">{{task}}</a></td>
+                    <td>{{task.importance}}</td>
+                    <td>{{task.created_at}}</td>
+                    <td>{{task.deadline}}</td>
+                    {% if task.done %}
+                    <td>Completed</td>
+                    {% else %}
+                    <td>Not Yet Completed</td>
+                    {% endif %}
+                    <td id="action">
+                        <form action="{% url 'complete-task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        {% if task.done %}
+                        <input type="image" src="{% static 'notcompleteicon.png'%}" alt="Reverse" width="20" height="20">
+                        {% else %}
+                        <input type="image" src="{% static 'completeicon.png'%}" alt="Finished" width="20" height="20">
+                        {% endif %}
+                        </form>
+
+                        <form action="{% url 'edit-task' task.id %}" method="GET">
+                        <input type="image" src="{% static 'editicon.png'%}" alt="Edit" width="20" height="20">
+                        </form>
+
+                        <form action="{% url 'delete-task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="image" src="{% static 'deleteicon.png'%}" alt="Delete" width="20" height="20">
+                        </form>
+                </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        </div>
+    <div class="col"></div>
+    </div>
+</div>
+
+{% endblock %} 

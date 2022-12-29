@@ -1,0 +1,15 @@
+body{
+    background-color: rgb(135, 146, 135);
+}
+
+div{
+    text-align: center;
+}
+
+#action{
+    display:flex;
+}
+
+/* #detail h3{
+    padding:5px;
+} */

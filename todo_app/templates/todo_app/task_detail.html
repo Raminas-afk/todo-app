@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Task Details {% endblock %}
+
+{% block content %} 
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6" id="detail">
+            <h3>Task Name:</h3> <br> <h4>{{task}}</h4>
+            <h3>Importance:</h3> <br> <h4>{{task.importance}}</h4>
+            <h3>Created Date:</h3> <br> <h4>{{task.created_at}}</h4>
+            <h3>Deadline:</h3> <br> <h4>{{task.deadline}}</h4>
+            {% if task.done %}
+            <h3>Status:</h3> <br> <h4>Completed</h4>
+            {% else %}
+            <h3>Status:</h3> <br> <h4>Not Yet Completed</h4>
+            {% endif %}
+            <h3>Description:<h3> <br> <h4>{{task.description}}</h4>
+
+        </div>
+        <div class="col"></div>
+{% endblock %}
+
